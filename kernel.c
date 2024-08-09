@@ -70,6 +70,8 @@ void terminal_initialize(void)
 			terminal_buffer[index] = vga_entry(' ', terminal_color);
 		}
 	}
+
+	terminal_buffer[373] = vga_entry(' ', vga_entry_color(VGA_COLOR_BLUE, VGA_COLOR_RED));
 }
 
 void terminal_setcolor(uint8_t color) 
@@ -81,6 +83,12 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 {
 	const size_t index = y * VGA_WIDTH + x;
 	terminal_buffer[index] = vga_entry(c, color);
+}
+
+void putpixel(size_t x , size_t y)
+{
+    unsigned char* location = (unsigned char*)0xA0000 + 320 * x + y;
+    *location = 0; //black
 }
 
 void terminal_putchar(char c) 
