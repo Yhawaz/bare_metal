@@ -8,9 +8,12 @@
 #endif
 
 /* This tutorial will only work for the 32-bit ix86 targets. */
-#if !defined(__i386__)
-#error "This tutorial needs to be compiled with a ix86-elf compiler"
-#endif
+// #if !defined(__i386__)
+// #error "This tutorial needs to be compiled with a ix86-elf compiler"
+// #endif
+
+extern void store_idt(char* buf);
+extern void print_to_qemu_console();
 
 /* Hardware text mode color constants. */
 enum vga_color {
@@ -126,4 +129,13 @@ void kernel_main(void)
 
 	/* Newline support is left as an exercise. */
 	terminal_writestring("1 \n 2 \n 3 \n 4 \n 5 \n 6 \n 7 \n 8 \n 9");
+
+	
+	// char buf[6] = { 0 };
+	// store_idt(&buf[0]);
+
+	// printf("hello world\n");
+
+	print_to_qemu_console();
+	while (1);
 }
